@@ -4,12 +4,17 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 
 public class CurlBuilder {
+
+    String method;
+
     public CurlBuilder(Interceptor.Chain chain){
         Request request = chain.request();
-        request.method();
+        method = request.method();
     }
 
     public String build(){
-        return null;
+        StringBuilder builder = new StringBuilder();
+
+        return builder.toString();
     }
 }
