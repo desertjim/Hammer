@@ -26,8 +26,8 @@ public class CurlBuilder {
         builder.append("-X " + method + " ");
 
         if (body != null && body.contentType() != null) {
-            builder.append("-H " + body.contentType().toString() + " ");
-            builder.append("-d" + body.contentType());
+            builder.append("-H '" + body.contentType().toString() + "' ");
+            builder.append("-d '" + body.contentType()+"'");
         }
 
         if (headers != null && headers.size() > 0) {
