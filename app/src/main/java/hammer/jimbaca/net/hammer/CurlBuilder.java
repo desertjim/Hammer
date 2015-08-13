@@ -11,6 +11,7 @@ public class CurlBuilder {
     String url;
     Headers headers;
     RequestBody body;
+    StringBuilder builder = new StringBuilder();
 
     public CurlBuilder(Interceptor.Chain chain) {
         Request request = chain.request();
@@ -20,10 +21,17 @@ public class CurlBuilder {
         body = request.body();
     }
 
+    private void appendArgs(String... args){
+        for(String arg: args){
+            builder.append(arg);
+            builder.append(" ");
+        }
+    }
+
+
     public String build() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("curl ");
-        builder.append("-X " + method + " ");
+        appendArgs("curl");
+        appendArgs("-X", method);
 
         if (body != null && body.contentType() != null) {
             builder.append("-H '" + body.contentType().toString() + "' ");
