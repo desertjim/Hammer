@@ -12,6 +12,8 @@ public class CurlBuilder {
     Headers headers;
     RequestBody body;
     StringBuilder builder = new StringBuilder();
+    String spaceCharacter = " ";
+    String quoteCharacter = "'";
 
     public CurlBuilder(Interceptor.Chain chain) {
         Request request = chain.request();
@@ -26,6 +28,15 @@ public class CurlBuilder {
             builder.append(arg);
             builder.append(" ");
         }
+    }
+
+    private void appendSingleArgPair(String arg, String argValue){
+        builder.append(arg);
+        builder.append(spaceCharacter);
+        builder.append(quoteCharacter);
+        builder.append(argValue);
+        builder.append(quoteCharacter);
+        builder.append(spaceCharacter);
     }
 
 
