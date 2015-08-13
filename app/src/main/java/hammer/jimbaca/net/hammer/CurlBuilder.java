@@ -23,6 +23,10 @@ public class CurlBuilder {
         body = request.body();
     }
 
+    private void reset(){
+        builder.delete(0, builder.length());
+    }
+
     private void appendArgs(String... args){
         for(String arg: args){
             builder.append(arg);
@@ -41,21 +45,21 @@ public class CurlBuilder {
 
 
     public String build() {
+        reset();
+        
         appendArgs("curl");
         appendArgs("-X", method);
 
         if (body != null && body.contentType() != null) {
-            builder.append("-H '" + body.contentType().toString() + "' ");
-            builder.append("-d '" + body.contentType()+"'");
+            appendSingleArgPair("-H", body.contentType().toString());
+            appendSingleArgPair("-d", body.toString());
         }
 
         if (headers != null && headers.size() > 0) {
             // Add headers here
         }
 
-
-
-        builder.append(url);
+        appendArgs(url);
 
         return builder.toString();
     }
