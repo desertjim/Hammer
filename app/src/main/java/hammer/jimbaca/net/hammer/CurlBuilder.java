@@ -14,6 +14,10 @@ public class CurlBuilder {
     StringBuilder builder = new StringBuilder();
     String spaceCharacter = " ";
     String quoteCharacter = "'";
+    String command = "curl";
+    String methodOption = "-X";
+    String headerOption = "-H";
+    String dataOption = "-d";
 
     public CurlBuilder(Interceptor.Chain chain) {
         Request request = chain.request();
@@ -46,13 +50,13 @@ public class CurlBuilder {
 
     public String build() {
         reset();
-        
-        appendArgs("curl");
-        appendArgs("-X", method);
+
+        appendArgs(command);
+        appendArgs(methodOption, method);
 
         if (body != null && body.contentType() != null) {
-            appendSingleArgPair("-H", body.contentType().toString());
-            appendSingleArgPair("-d", body.toString());
+            appendSingleArgPair(headerOption, body.contentType().toString());
+            appendSingleArgPair(dataOption, body.toString());
         }
 
         if (headers != null && headers.size() > 0) {
