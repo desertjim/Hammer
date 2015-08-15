@@ -31,6 +31,10 @@ public class CurlBuilder {
 
     }
 
+    public void setMethod(String method){
+        this.method = method;
+    }
+
     private void reset(){
         builder.delete(0, builder.length());
     }
