@@ -35,6 +35,10 @@ public class CurlBuilder {
         this.method = method;
     }
 
+    public void setUrl(String url){
+        this.url = url;
+    }
+
     private void reset(){
         builder.delete(0, builder.length());
     }
