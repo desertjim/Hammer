@@ -27,6 +27,10 @@ public class CurlBuilder {
         body = request.body();
     }
 
+    public CurlBuilder(){
+
+    }
+
     private void reset(){
         builder.delete(0, builder.length());
     }
