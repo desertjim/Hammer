@@ -39,6 +39,10 @@ public class CurlBuilder {
         this.url = url;
     }
 
+    public void setRequestBody(RequestBody body){
+        this.body = body;
+    }
+
     private void reset(){
         builder.delete(0, builder.length());
     }
