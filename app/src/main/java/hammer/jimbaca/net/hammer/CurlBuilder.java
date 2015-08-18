@@ -43,6 +43,10 @@ public class CurlBuilder {
         this.body = body;
     }
 
+    public void setQuoteCharacter(String character){
+        this.quoteCharacter = character;
+    }
+
     private void reset(){
         builder.delete(0, builder.length());
     }
