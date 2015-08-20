@@ -27,38 +27,38 @@ public class CurlBuilder {
         body = request.body();
     }
 
-    public CurlBuilder(){
+    public CurlBuilder() {
 
     }
 
-    public void setMethod(String method){
+    public void setMethod(String method) {
         this.method = method;
     }
 
-    public void setUrl(String url){
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public void setRequestBody(RequestBody body){
+    public void setRequestBody(RequestBody body) {
         this.body = body;
     }
 
-    public void setQuoteCharacter(String character){
+    public void setQuoteCharacter(String character) {
         this.quoteCharacter = character;
     }
 
-    private void reset(){
+    private void reset() {
         builder.delete(0, builder.length());
     }
 
-    private void appendArgs(String... args){
-        for(String arg: args){
+    private void appendArgs(String... args) {
+        for (String arg : args) {
             builder.append(arg);
             builder.append(" ");
         }
     }
 
-    private void appendSingleArgPair(String arg, String argValue){
+    private void appendSingleArgPair(String arg, String argValue) {
         builder.append(arg);
         builder.append(spaceCharacter);
         builder.append(quoteCharacter);
@@ -72,7 +72,10 @@ public class CurlBuilder {
         reset();
 
         appendArgs(command);
-        appendArgs(methodOption, method);
+
+        if (method != null) {
+            appendArgs(methodOption, method);
+        }
 
         if (body != null && body.contentType() != null) {
             appendSingleArgPair(headerOption, body.contentType().toString());
