@@ -86,7 +86,9 @@ public class CurlBuilder {
             // Add headers here
         }
 
-        appendArgs(url);
+        if(url != null) {
+            appendArgs(url);
+        }
 
         return builder.toString();
     }
