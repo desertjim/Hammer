@@ -90,6 +90,6 @@ public class CurlBuilder {
             appendArgs(url);
         }
 
-        return builder.toString();
+        return builder.toString().trim();
     }
 }
