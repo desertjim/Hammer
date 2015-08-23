@@ -21,4 +21,12 @@ public class BuilderTest {
         String value = builder.build();
         assert value.equals("curl -X POST");
     }
+
+    @Test
+    public void testUrlSet(){
+        CurlBuilder builder = new CurlBuilder();
+        builder.setUrl("http://www.google.com");
+        String value = builder.build();
+        assert value.equals("curl http://www.google.com");
+    }
 }
