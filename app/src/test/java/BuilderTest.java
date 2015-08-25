@@ -29,4 +29,13 @@ public class BuilderTest {
         String value = builder.build();
         assert value.equals("curl http://www.google.com");
     }
+
+    @Test
+    public void testUrlAndMethod(){
+        CurlBuilder builder = new CurlBuilder();
+        builder.setMethod("POST");
+        builder.setUrl("http://www.google.com");
+        String value = builder.build();
+        assert value.equals("curl -X POST http://www.google.com");
+    }
 }
