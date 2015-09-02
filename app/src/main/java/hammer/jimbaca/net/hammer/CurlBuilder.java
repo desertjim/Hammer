@@ -5,6 +5,16 @@ import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+
+import okio.Buffer;
+import okio.BufferedSink;
+import okio.ByteString;
+import okio.Source;
+import okio.Timeout;
+
 public class CurlBuilder {
 
     String method;
@@ -68,7 +78,7 @@ public class CurlBuilder {
     }
 
 
-    public String build() {
+    public String build(){
         reset();
 
         appendArgs(command);
@@ -79,7 +89,13 @@ public class CurlBuilder {
 
         if (body != null && body.contentType() != null) {
             appendSingleArgPair(headerOption, body.contentType().toString());
-            appendSingleArgPair(dataOption, body.toString());
+            Buffer buffer = new Buffer();
+            try {
+                body.writeTo(buffer);
+            }catch (Exception e){
+                throw new RuntimeException(e);
+            }
+            appendSingleArgPair(dataOption, buffer.readString(Charset.defaultCharset()));
         }
 
         if (headers != null && headers.size() > 0) {
